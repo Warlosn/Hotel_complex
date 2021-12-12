@@ -1,9 +1,11 @@
 use Hotel_complex;
 drop procedure AddUser;
 drop procedure ViewRoomTypes;
-drop procedure ViewEmptyRooms;
+drop function CountEmptyRooms;
 drop procedure BookRoom;
 drop procedure ViewServiceType;
+drop procedure BookRoom;
+drop procedure CheckAllServices;
 go
 ---------------------------------------------------------------Регистрация клиента-------------------------------------------------------------
 create procedure AddUser
@@ -31,16 +33,18 @@ select type_name_, type_coastPerDay, type_description from Room_type;
 end;
 go
 ---------------------------------------------------------------Просмотр кол-ва свободных номеров-------------------------------------------------------------
-create procedure ViewEmptyRooms
-			@type nvarchar(20)	
-as 
+create function CountEmptyRooms (@type nvarchar(20))
+returns int
+as
 begin
+declare @countR int;
 declare @check nvarchar(20);
- @check = type_id_ from Room_type where type_name_ =@type;
-select count(*) from Rooms where Rooms.room_isFree=1 and room_idType=@check;
+select @check = type_id_ from Room_type where type_name_ =@type;
+select @countR = count(*) from Rooms where Rooms.room_isFree=1 and room_idType=@check;
+return @countR;
 end;
----------------------------------------------------------------Просмотр доступных сервисов-------------------------------------------------------------
 go
+---------------------------------------------------------------Просмотр доступных сервисов-------------------------------------------------------------
 create procedure ViewServiceType
 as 
 begin
@@ -67,11 +71,10 @@ insert into BookedRooms(room_id, user_id_,date_checkIn,date_checkOut,price) valu
 	( @roomId,@userId,@checkIn,@checkOut, @price);
 	update Rooms set room_isFree=0 where room_id =@roomId;
 end;
-
-Exec BookRoom 'test','11.01.2021','15.01.2021','twin';
-drop procedure BookRoom;
-select * from Rooms;
-select * from users;
-select * from Room_type;
-select * from BookedRooms
-
+go
+----------------------------------------------Просмотр доступных сервисов------------------------------------------------------------
+create procedure CheckAllServices
+as begin
+select services_type_name, services_type_price from Services_type;
+end;
+go

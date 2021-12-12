@@ -31,6 +31,36 @@ insert into Room_type(type_name_,type_coastPerDay,type_description)
 	values ('apartment', 500,'kitchen');
 ---------------------------------ROOMS(FOR export)-----------------------------------------
 select * from Rooms;
+insert into Rooms(room_number,room_idType,room_isFree)
+		values (101,1,1);
+	insert into Rooms(room_number,room_idType,room_isFree)
+		values (102,1,1);
+	insert into Rooms(room_number,room_idType,room_isFree)
+		values (103,1,1);
+	insert into Rooms(room_number,room_idType,room_isFree)
+		values (104,1,1);
+	insert into Rooms(room_number,room_idType,room_isFree)
+		values (105,1,1);
+	insert into Rooms(room_number,room_idType,room_isFree)
+		values (106,2,1);
+	insert into Rooms(room_number,room_idType,room_isFree)
+		values (107,2,1);
+	insert into Rooms(room_number,room_idType,room_isFree)
+		values (108,2,1);
+	insert into Rooms(room_number,room_idType,room_isFree)
+		values (109,2,1);
+	insert into Rooms(room_number,room_idType,room_isFree)
+		values (110,3,1);
+	insert into Rooms(room_number,room_idType,room_isFree)
+		values (111,3,1);
+	insert into Rooms(room_number,room_idType,room_isFree)
+		values (112,3,1);
+	insert into Rooms(room_number,room_idType,room_isFree)
+		values (113,4,1);
+	insert into Rooms(room_number,room_idType,room_isFree)
+		values (114,4,1);
+	insert into Rooms(room_number,room_idType,room_isFree)
+		values (115,5,1);
 	insert into Rooms(room_number,room_idType,room_isFree)
 		values (201,1,1);
 	insert into Rooms(room_number,room_idType,room_isFree)

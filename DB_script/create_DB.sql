@@ -43,7 +43,7 @@ select * from Services_type;
 
 create table Users(
 user_id_ int primary key identity(1,1),
-user_email nvarchar(40) not null,
+user_email nvarchar(40) not null UNIQUE,
 user_password nvarchar(20) not null,
 user_name_ nvarchar(20) not null,
 user_secondName nvarchar(20) not null,
@@ -77,7 +77,7 @@ user_id_ int not null constraint FK_Busy_room_Users foreign  key references User
 date_checkIn date not null,
 date_checkOut date not null,
 price float
-);--price as (DATEDIFF(day, date_checkIn,date_checkOut)*5)PERSISTED 
+);
 
 create table Services_(
 service_id int primary key identity(1,1),
@@ -117,4 +117,18 @@ select * from FreeRoomView
 end;
 go
 --------------------------------------------------------INDEX----------------------------------------------------------------
-select * from Rooms
+drop procedure FindUserIndex;
+drop index FindUserEmail on Users;
+set statistics io on;
+set statistics time on;
+go
+create procedure FindUserIndex 
+@email nvarchar(40)
+as 
+begin
+select * from Users where user_email = @email;
+end;
+go
+create index FindUserEmail on Users(user_email);
+DBCC dropcleanbuffers;
+checkpoint
