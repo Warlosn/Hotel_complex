@@ -2,10 +2,8 @@ use Hotel_complex;
 drop procedure AddUser;
 drop procedure ViewRoomTypes;
 drop function CountEmptyRooms;
-drop procedure BookRoom;
 drop procedure ViewServiceType;
 drop procedure BookRoom;
-drop procedure CheckAllServices;
 go
 ---------------------------------------------------------------Регистрация клиента-------------------------------------------------------------
 create procedure AddUser
@@ -70,11 +68,5 @@ set @price = DATEDIFF(day, @checkIn, @checkOut) * (select type_coastPerDay from 
 insert into BookedRooms(room_id, user_id_,date_checkIn,date_checkOut,price) values
 	( @roomId,@userId,@checkIn,@checkOut, @price);
 	update Rooms set room_isFree=0 where room_id =@roomId;
-end;
-go
-----------------------------------------------Просмотр доступных сервисов------------------------------------------------------------
-create procedure CheckAllServices
-as begin
-select services_type_name, services_type_price from Services_type;
 end;
 go

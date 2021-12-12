@@ -1,20 +1,13 @@
 use Hotel_complex;
+drop procedure CheckBookedRoom;
+drop procedure CheckBusyRoom;
+drop procedure AddStoUsers;
 drop procedure CheckClient;
 drop procedure CheckBookedClient;
 drop procedure CheckOutClient;
-drop procedure CheckServices;
-drop procedure CheckBookedRoom;
-drop procedure CheckBusyRoom;
-drop procedure CheckAddServices;
 drop procedure AddClientService;
+drop procedure CheckAddServices;
 go 
-----------------------------------------------Просмотр заказанных сервисов------------------------------------------------------------
-create procedure CheckServices
-as
-begin
-select * from Services_;
-end;
-go
 ----------------------------------------------Просмотр забронированных номеров------------------------------------------------------------
 create procedure CheckBookedRoom
 as
