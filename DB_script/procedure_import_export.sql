@@ -2,6 +2,19 @@ use Hotel_complex;
 
 drop procedure Import_services_type_xml;
 drop procedure Export_rooms_xml;
+-----------------------------------------------------------------------------------------------
+Exec Import_services_type_xml;															 -- импорт нового сервиса
+Exec Export_rooms_xml;																   	 -- экспорт состояний номеров
+
+
+
+
+
+
+
+
+
+
 -----------------------------------IMPORT SERVICE_TYPE FROM XML--------------------------------
 go
 Create Procedure Import_services_type_xml
@@ -21,10 +34,6 @@ go
 create procedure Export_rooms_xml
 as
 begin
-EXEC master.dbo.sp_configure 'show advanced options', 1
-		reconfigure with override;
-	EXEC master .dbo.sp_configure 'xp_cmdshell', 1
-		reconfigure with override;
 
 declare @fileName nvarchar(100);
 	declare @sqlStr varchar(1000);
@@ -37,6 +46,10 @@ declare @fileName nvarchar(100);
 end;
 go
 -------------------------------------------------------------------------------------------
-go
+grant ADMINISTER BULK OPERATIONS to hotel_employee;
 
-go
+EXEC dbo.sp_configure 'show advanced options', 1
+		reconfigure with override;
+	EXEC dbo.sp_configure 'xp_cmdshell', 1
+		reconfigure with override;
+grant execute on xp_cmdshell to hotel_complex_empoyee;

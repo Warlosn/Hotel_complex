@@ -1,3 +1,4 @@
+use Hotel_complex;
 drop role Hotel_clinet_role
 drop role Hotel_employee_role
 --------------------------------
@@ -30,3 +31,8 @@ exec sp_addrolemember 'Hotel_clinet_role', 'hotel_complex_client';
 go
 exec sp_addrolemember 'Hotel_employee_role', 'hotel_complex_empoyee';
 go
+-----------------------------------------------------------------
+GRANT EXECUTE ON [sys].[xp_cmdshell] TO hotel_complex_empoyee
+use Hotel_complex;
+revoke control server to hotel_employee;
+use master;
